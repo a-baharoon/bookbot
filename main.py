@@ -1,3 +1,4 @@
+import sys 
 from stats import count_book_words, count_book_chars, format_chars, sort_dict
 
 def get_book_text(path_to_file):
@@ -5,7 +6,13 @@ def get_book_text(path_to_file):
         return file.read()
 
 def main():
-    book_path = "books/frankenstein.txt"
+    
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
+    book_path = sys.argv[1]
+    
     book_text = get_book_text(book_path)
     
     book_words_count = count_book_words(book_text)
@@ -22,7 +29,7 @@ def main():
     for i in range (len(stats)):
         if str.isalpha(stats[i]["char"]):
             print(stats[i]["char"] + ": " + str(stats[i]["num"]))
-            
-                
+
+
     print("============= END ===============")
 main()
